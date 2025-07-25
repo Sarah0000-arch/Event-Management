@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path
 from events.views import dashboard,event_search,show_event, create_event, update_event, delete_event, participant_list, category_list, event_search, create_category, create_participant, update_category, update_participant, delete_category, delete_participant
-from debug_toolbar.toolbar import debug_toolbar_urls
 urlpatterns = [
     path('', dashboard, name='home'),
     path('category/<int:category_id>/', dashboard, name='filter-by-category'),
@@ -19,4 +18,4 @@ urlpatterns = [
     path('create-participant/', create_participant, name='create-participant'),
     path('update-participant/<int:id>/', update_participant, name='update-participant'),
     path('delete-participant/<int:id>/', delete_participant, name='delete-participant'),
-]+ debug_toolbar_urls()
+]
