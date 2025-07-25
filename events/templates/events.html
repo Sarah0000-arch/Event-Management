@@ -1,0 +1,49 @@
+     {% extends "dashboard.html" %}
+     {% block title %}Event Dashboard{% endblock title %}
+     {% block Events %}
+     <!-- Event table -->
+            <div class="bg-white rounded-xl shadow-sm">
+                <div class="grid grid-cols-1 lg:grid-cols-4 p-4 border-b border-gray-100 text-sm text-gray-500">
+                    <div>EVENT TITLE</div>
+                    <div class="hidden lg:block">CATEGORY</div>
+                    <div class="hidden lg:block">PARTICIPANTS</div>
+                    <div class="hidden lg:block">SCHEDULED AT</div>
+                </div>
+                
+                <div class="divide-y divide-gray-300">
+                     {% for event in events %}
+                    <div class="grid grid-cols-1 lg:grid-cols-4 p-4 border-b border-gray-100 text-sm text-gray-500">
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <div class="flex items-center gap-2">
+                                <a href="{% url 'event-detail' event.id %}">
+                                <span>{{event.name}} </span></a>
+                                <div class="flex gap-2">
+                                <a href="{% url 'event-detail' event.id %}" class="lg:hidden px-2 py-1 bg-yellow-300 rounded-xl">view</a>
+                                <a href="{% url 'update-event' event.id %} " class="px-2 py-1 bg-green-300 rounded-xl">Update</a>
+                                <form action="{% url 'delete-event' event.id %}" method='POST'>
+                                    {% csrf_token %}
+                                    <button type='submit' class="px-2 py-1 bg-red-400 rounded-xl">Delete</button>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="{% url 'filter-by-category' event.category.id %}">
+                        <div class="hidden lg:block"><span class="px-3 py-1 bg-blue-50 p-1 rounded-xl text-sm text-blue-600">{{event.category}} </span></div>
+                    </a>
+                        <div class="hidden lg:flex -space-x-2">
+                            {% for par in event.participants.all %}
+                            <div
+                                class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white border-2 border-white">
+                                 {{par.name|slice:':1'}}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <div class="hidden lg:block"><span>{{event.date}} </span></div>
+                    </div>
+                     {% endfor %}
+                </div> <!-- div for divider EVENT CLOSED -->
+               
+                </div> <!--event table closed -->
+                  
+        {% endblock Events %}

@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<style>
+    body{
+        font-family: "Inter",sans-serif;
+    }
+</style>
+<body class="p-6 bg-gray-100">
+    <div class="max-w-[1400px] mx-auto">
+    
+    <h2 class="text-xl font-semibold mb-6">Category List</h2>
+
+<div class="bg-white rounded-xl shadow-sm">
+                <div class="hidden md:grid md:grid-cols-2 p-4 border-b border-gray-100 text-sm text-gray-500">
+                    <div>CATEGORY NAME</div>
+                    <div>DESCRIPTION</div>
+                </div>
+                
+                <div class="divide-y divide-gray-300">
+                    {% for category in categories %}
+                    <div class="grid grid-cols-1 md:grid-cols-2 p-4 border-b border-gray-100 text-sm text-gray-500 space-y-2">
+                        <div class="flex flex-col md:flex-row items-start md:items-center gap-2">
+                            <div class="flex flex-row items-center gap-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                            <div class="flex items-center gap-2"><span>{{category.name}} </span></div>
+                            </div>
+                            <div class="flex gap-2">
+                                <a href="{% url 'update-category' category.id %} " class="px-2 py-1 bg-green-300 rounded-xl">Update</a>
+                                <form action="{% url 'delete-category' category.id %}" method='POST'>
+                                    {% csrf_token %}
+                                    <button type='submit' class="px-2 py-1 bg-red-400 rounded-xl">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-2"><span>{{category.description}} </span>    
+                        </div>
+                    </div>
+                     {% endfor %}
+                </div>
+               
+            </div>
+        </div> 
+    </body>
+</html>

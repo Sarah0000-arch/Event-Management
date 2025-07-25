@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    
+</head>
+<style>
+    body{
+        font-family: "Inter",sans-serif;
+    }
+</style>
+<body class="bg-gray-100 min-h-screen">
+
+    <div class="max-w-3xl mx-auto py-12 px-6">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h1 class="text-3xl font-bold text-gray-800 mb-4">{{ event.name }}</h1>
+            <p class="text-gray-600 mb-2"><span class="font-bold text-gray-900">Date:</span> {{ event.date }}</p>
+            <p class="text-gray-600 mb-2"><span class="font-bold text-gray-900">Time:</span> {{ event.time }}</p>
+            <p class="text-gray-600 mb-2"><span class="font-bold text-gray-900">Location:</span> {{ event.location }}</p>
+            <p class="text-gray-600 mb-2"><span class="font-bold text-gray-900">Category:</span> {{ event.category.name }}</p>
+            <p class="text-gray-700 mt-6">{{ event.description }}</p>
+
+            {% if event.participants.all %}
+                <div class="mt-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-2">Participants</h2>
+                    <ul class="list-disc list-inside text-gray-700">
+                        {% for participant in event.participants.all %}
+                            <li>{{ participant.name }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+</body>
+</html>
