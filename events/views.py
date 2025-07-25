@@ -107,7 +107,7 @@ def create_category(request):
     category_form = CategoryModelForm()
 
     if request.method == "POST":
-        category_form = EventModelForm(request.POST)
+        category_form = CategoryModelForm(request.POST)
         if category_form.is_valid():
             category = category_form.save()
             messages.success(request, "Category Created Successfully")

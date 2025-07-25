@@ -28,9 +28,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="{% url 'filter-by-category' event.category.id %}">
                         <div class="hidden lg:block"><span class="px-3 py-1 bg-blue-50 p-1 rounded-xl text-sm text-blue-600">{{event.category}} </span></div>
-                    </a>
                         <div class="hidden lg:flex -space-x-2">
                             {% for par in event.participants.all %}
                             <div
